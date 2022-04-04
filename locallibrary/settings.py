@@ -27,7 +27,14 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'br12c9m#^wiqm0r85$w3)q-(0v2@%r
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-
+CSRF_COOKIE_SECURE = True #to avoid transmitting the CSRF cookie over HTTP accidentally.
+SESSION_COOKIE_SECURE = True #to avoid transmitting the session cookie over HTTP accidentally.
+SECURE_SSL_REDIRECT = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_HSTS_SECONDS = 86400  # 1 day
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 # Set hosts to allow any app on Heroku and the local testing URL
 ALLOWED_HOSTS = ['rowalibrary.herokuapp.com','127.0.0.1']
 
