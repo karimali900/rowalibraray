@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.urls import path
 from django.contrib import admin
-
+from django.conf.urls.i18n import i18n_patterns
 # Use include() to add URLS from the catalog application and authentication system
 from django.urls import include
+from django.utils.translation import gettext_lazy as _
 
 
 urlpatterns = [
@@ -29,7 +30,11 @@ urlpatterns += [
     path('catalog/', include('catalog.urls')),
     path('rosetta/', include('rosetta.urls')),  # NEW
 ]
-
+urlpatterns += i18n_patterns(
+   
+    path('rosetta/', include('rosetta.urls')),
+   
+)
 
 # Use static() to add url mapping to serve static files during development (only)
 from django.conf import settings
