@@ -1,4 +1,8 @@
 from django.urls import path
+from django.conf.urls.i18n import i18n_patterns
+from django.contrib import admin
+from django.urls import path, include
+from django.utils.translation import gettext_lazy as _
 
 from . import views
 
@@ -10,6 +14,7 @@ urlpatterns = [
     path('authors/', views.AuthorListView.as_view(), name='authors'),
     path('author/<int:pk>',
          views.AuthorDetailView.as_view(), name='author-detail'),
+     path('rosetta/', include('rosetta.urls')),     
 ]
 
 
