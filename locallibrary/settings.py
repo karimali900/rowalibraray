@@ -25,8 +25,8 @@ import os
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'br12c9m#^wiqm0r85$w3)q-(0v2@%r6ikqnu78xgzw0v8_sbk_')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = False
+#DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 CSRF_COOKIE_SECURE = True #to avoid transmitting the CSRF cookie over HTTP accidentally.
 SESSION_COOKIE_SECURE = True #to avoid transmitting the session cookie over HTTP accidentally.
 SECURE_SSL_REDIRECT = True
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rosetta',
     # Add our new application 
     'catalog.apps.CatalogConfig', #This object was created for us in /catalog/apps.py
 ]
@@ -55,6 +56,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.locale.LocaleMiddleware', # new
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -117,7 +119,16 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+from django.utils.translation import gettext_lazy as _
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('fr', _('French')),
+    ('es', _('Spanish')),
+    ('ar', _('Arabic')),
+)
+
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -155,3 +166,7 @@ STATIC_URL = '/static/'
 # Static file serving.
 # http://whitenoise.evans.io/en/stable/django.html#django-middleware
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale/',
+]

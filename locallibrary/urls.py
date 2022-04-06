@@ -27,6 +27,7 @@ urlpatterns = [
 
 urlpatterns += [
     path('catalog/', include('catalog.urls')),
+    path('rosetta/', include('rosetta.urls')),  # NEW
 ]
 
 
